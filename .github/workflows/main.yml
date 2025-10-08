@@ -25,14 +25,25 @@ jobs:
              extension="${filename##*.}"
              if [["$filename"== *>*]]; then
                echo "  - $file (Type: $extension)"
+               if $extension == ".py"; then
+               - uses: actions/setup-python@v6
+                 with:
+                     python-version: '3.13'
               else
                 echo "  - $file (Type: No extension or directory)"
               fi
             done
+        ## install dependencies
+       - name: Install dependencies
+         run: pip install -r requirements.txt
      
-     ## install dependencies
-    run-script:
-      ### run the script
-
-    notify:
-      # notifies user
+   run-script:
+        runs-on: windows-latest
+        needs: setup
+        steps:
+        - name: run script
+          run: python $filename
+        
+        ### run the script
+  
+   ## users who push to the branch will be notified by notifications settings being turned on for github actions
