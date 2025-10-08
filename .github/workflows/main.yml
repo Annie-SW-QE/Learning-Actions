@@ -3,7 +3,7 @@ run-name: Work Task Test
 on:
   push:
     branches:
-      - 'Workflow-Testing/**'
+      - 'workflow-test/**'
 jobs:
    setup:
      runs-on: windows-latest
