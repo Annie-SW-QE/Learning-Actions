@@ -1,9 +1,7 @@
 name: Work Tasks
 run-name: Work Task Test
-on:
-  push:
-    branches:
-      - 'workflow_test'
+on: push
+  
 jobs:
    setup:
      runs-on: ubuntu-latest
