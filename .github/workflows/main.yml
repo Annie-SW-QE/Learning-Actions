@@ -29,6 +29,9 @@ jobs:
             done
             
         shell: bash
+      - name: Check output
+        run: echo "The output is:${{ steps.file-list.outputs.file}}"
+      
       
   build: 
     needs: setup
