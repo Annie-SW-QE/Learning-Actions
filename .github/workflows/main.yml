@@ -2,7 +2,7 @@ name: learn-workflows
 on: 
   push:
     branches:
-    - main
+    - python-only
 jobs:
   setup:
     runs-on: ubuntu-latest
@@ -22,10 +22,10 @@ jobs:
             # For push events, compare against the previous commit in the branch
             changedfiles=$(git diff --name-only --diff-filter=ACMRTUXB "${{ github.event.before }}" "${{ github.sha }}")
             echo "$changedfiles"
-            YML_FILES=$(echo "$changedfiles" | grep '\.yml$')
-            echo "yaml_files=$YML_FILES" >> GITHUB_OUTPUT
-            # PY_FILES=$(echo "$changedfiles" | grep '\.py$')
-            # echo "py_files=$PY_FILES" >> GITHUB_OUTPUT
+            # YML_FILES=$(echo "$changedfiles" | grep '\.yml$')
+            # echo "yaml_files=$YML_FILES" >> GITHUB_OUTPUT
+            PY_FILES=$(echo "$changedfiles" | grep '\.py$')
+            echo "py_files=$PY_FILES" >> GITHUB_OUTPUT
             # REQ_FILES=$(echo "$changedfiles" | grep '\.py$')
             # echo "req_files=$REQ_FILES" >> GITHUB_OUTPUT
             
@@ -38,7 +38,7 @@ jobs:
         
           
       - name: Check output
-        run: echo "The output is:${{ steps.file-list.outputs.yaml_files}}"
+        run: echo "The output is:${{ steps.file-list.outputs.py_files}}"
       
       
   build: 
