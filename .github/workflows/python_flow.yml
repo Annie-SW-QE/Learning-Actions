@@ -38,7 +38,7 @@ jobs:
             
     
             
-        shell: bash
+        # shell: bash
         
           
       - name: Check output
