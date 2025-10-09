@@ -59,11 +59,13 @@ jobs:
             ## grab requirements text from output
     
     - name: Echo Output
+      id: get_file_name
       run: |
-        echo "retrieved file is:${{needs.setup.outputs.pyfiles}}"
+        echo "retrieved file is:${{needs.setup.outputs.pyfiles}}" 
+        echo "filename=${{needs.setup.outputs.pyfiles}}" >> $GITHUB_OUTPUT
         echo "current wd: ${{ github.workspace}}"
 
      
-    # - name: Run script
-      # run: python ${{needs.setup.outputs.pyfiles}}
+    - name: Run script
+      run: python ${{steps.get_file_name.outputs.filename}}
         
