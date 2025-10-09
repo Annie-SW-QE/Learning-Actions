@@ -15,8 +15,8 @@ jobs:
         id:  set_name
         run: |  
           echo $(git diff --name-only HEAD^)
-          script_Var = $(git diff --name-only HEAD^)
-          "script_name=$script_Var}" >>"$GITHUB_OUTPUT"
+          
+          "script_name=$(git diff --name-only HEAD^)}" >>"$GITHUB_OUTPUT"
           
           
 
