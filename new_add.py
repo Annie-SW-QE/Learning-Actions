@@ -1,0 +1,1 @@
+print("I'm a barbie girl, I hate this stupid wooooorrrrllld")
