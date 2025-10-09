@@ -28,7 +28,7 @@ jobs:
             # YML_FILES=$(echo "$changedfiles" | grep '\.yml$')
             # echo "yaml_files=$YML_FILES" >> $GITHUB_OUTPUT
             PY_FILES=$(echo "$changedfiles" | grep '\.py$')
-            
+            echo "$PY_FILES"
             echo "pyfiles=$PY_FILES" >> $GITHUB_OUTPUT
             
             # REQ_FILES=$(echo "$changedfiles" | grep '\.py$')
@@ -64,9 +64,12 @@ jobs:
         echo "retrieved file is:${{needs.setup.outputs.pyfiles}}" 
         echo "filename=${{needs.setup.outputs.pyfiles}}" >> $GITHUB_OUTPUT
         echo "current wd: ${{ github.workspace}}"
-
+    - name: checkout again
+      uses: actions/checkout@v5
+      with: 
+          fetch-depth: 2
      
     - name: Run script
       # run: python ${{steps.get_file_name.outputs.filename}}
-      run: python add_more_one.py
+      
         
