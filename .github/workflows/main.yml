@@ -24,6 +24,7 @@ jobs:
             
             for file in ${files}; do
                 echo "$file"
+            done
             
         shell: bash
         # run: echo "script_name=$(git diff --name-only HEAD^)}" >>"$GITHUB_OUTPUT"
