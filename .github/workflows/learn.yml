@@ -1,4 +1,5 @@
 name: learn-workflows
+run-name: learning
 on: 
   push:
     branches:
