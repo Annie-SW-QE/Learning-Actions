@@ -28,8 +28,7 @@ jobs:
                 #check file extension and save as output var for each, e.g. .py = python script, .txt = dependencies list
                 if: contains(file,'.py)
                 echo "python-script=$file" >> GITHUB_OUTPUT
-                # if: ${{contains($file,'.txt')}}
-                # echo "dependencies=$file" >> GITHUB_OUTPUT
+                
             done
             
         shell: bash
