@@ -16,6 +16,10 @@ jobs:
         run: echo $(git diff --name-only HEAD^)
       - name: Set file list
         id: file-list
+        env: 
+          PY_EXT : ".py"
+          TXT_EXT: ".txt"
+          YML_EXT: ".yml"
         run: |
             if [[ "${{ github.event_name }}" == "push" ]]; then
             # For push events, compare against the previous commit in the branch
@@ -26,16 +30,13 @@ jobs:
             for file in ${files}; do
                 # echo "file=$file" 
                 #check file extension and save as output var for each, e.g. .py = python script, .txt = dependencies list
-               if contains(${file},$PY_EXT);then
+               if: contains(env.YAML_EXT', $file)
                echo "${file}"
                fi
             done
             
         shell: bash
-        env: 
-          PY_EXT : ".py"
-          TXT_EXT: ".txt"
-          YML_EXT: ".yml"
+        
           
       - name: Check output
         run: echo "The output is:${{ steps.file-list.outputs.file}}"
