@@ -24,7 +24,7 @@ jobs:
             if [[ "${{ github.event_name }}" == "push" ]]; then
             # For push events, compare against the previous commit in the branch
             changedfiles=$(git diff --name-only --diff-filter=ACMRTUXB "${{ github.event.before }}" "${{ github.sha }}")
-            echo "$changedfiles
+            echo "$changedfiles"
             fi
             
             
