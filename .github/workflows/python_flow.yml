@@ -43,7 +43,7 @@ jobs:
         
           
       - name: Check output
-        run: echo "The output is:${{steps.file-list.outputs.py_files}}"
+        run: echo "The output is:${{steps.file-list.outputs.pyfiles}}"
       
       
   build: 
