@@ -6,6 +6,9 @@ on:
 jobs:
   setup:
     runs-on: ubuntu-latest
+    outputs:
+      py_files: ${{steps.file-list.outputs.py_files}}
+      # req_files: ${{steps.file-list.outputs.req_files}}
     steps:
       - name: Checkout and echo new filename
         uses: actions/checkout@v5
@@ -25,6 +28,7 @@ jobs:
             # YML_FILES=$(echo "$changedfiles" | grep '\.yml$')
             # echo "yaml_files=$YML_FILES" >> GITHUB_OUTPUT
             PY_FILES=$(echo "$changedfiles" | grep '\.py$')
+            echo "$py_files=$PY_FILES"
             echo "py_files=$PY_FILES" >> GITHUB_OUTPUT
             # REQ_FILES=$(echo "$changedfiles" | grep '\.py$')
             # echo "req_files=$REQ_FILES" >> GITHUB_OUTPUT
@@ -38,18 +42,19 @@ jobs:
         
           
       - name: Check output
-        run: echo "The output is:${{ steps.file-list.outputs.py_files}}"
+        run: echo "The output is:${{steps.file-list.outputs.py_files}}"
       
       
-  # build: 
-  #   needs: setup
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #         - name: Setup python environment
-  #           uses: actions/setup-python@v6
-  #           with:
-  #               python-version: '3.13'
-  #         # - name: Install dependencies
-  #           ## grab requirements text from output
-  #         # - name: Run script
-  #             # run: scripts from output
+  build: 
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+          - name: Setup python environment
+            uses: actions/setup-python@v6
+            with:
+                python-version: '3.13'
+          # - name: Install dependencies
+            ## grab requirements text from output
+          - name: Run script
+              # run: scripts from output
+            run: echo "retrieved file is:${{steps.file-list.outputs.py_files}}"
