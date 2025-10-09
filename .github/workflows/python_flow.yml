@@ -1,0 +1,55 @@
+name: learn-workflows
+on: 
+  push:
+    branches:
+    - python-only
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout and echo new filename
+        uses: actions/checkout@v5
+        with: 
+          fetch-depth: 2
+      - name: Show filename
+        
+        run: echo $(git diff --name-only HEAD^)
+      - name: Set file list
+        id: file-list
+     
+        run: |
+            if [[ "${{ github.event_name }}" == "push" ]]; then
+            # For push events, compare against the previous commit in the branch
+            changedfiles=$(git diff --name-only --diff-filter=ACMRTUXB "${{ github.event.before }}" "${{ github.sha }}")
+            echo "$changedfiles"
+            # YML_FILES=$(echo "$changedfiles" | grep '\.yml$')
+            # echo "yaml_files=$YML_FILES" >> GITHUB_OUTPUT
+            PY_FILES=$(echo "$changedfiles" | grep '\.py$')
+            echo "py_files=$PY_FILES" >> GITHUB_OUTPUT
+            # REQ_FILES=$(echo "$changedfiles" | grep '\.py$')
+            # echo "req_files=$REQ_FILES" >> GITHUB_OUTPUT
+            
+            fi
+            
+            
+    
+            
+        shell: bash
+        
+          
+      - name: Check output
+        run: echo "The output is:${{ steps.file-list.outputs.py_files}}"
+      
+      
+  # build: 
+  #   needs: setup
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #         - name: Setup python environment
+  #           uses: actions/setup-python@v6
+  #           with:
+  #               python-version: '3.13'
+  #         # - name: Install dependencies
+  #           ## grab requirements text from output
+  #         # - name: Run script
+  #             # run: scripts from output
