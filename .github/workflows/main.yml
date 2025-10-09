@@ -31,7 +31,8 @@ jobs:
                 # echo "file=$file" 
                 #check file extension and save as output var for each, e.g. .py = python script, .txt = dependencies list
                  echo "$file"
-                 echo "$PY_EXT"
+                 echo "$YAML_EXT"
+                 if: contains("$file","$YAML_EXT")
             
             done
             
