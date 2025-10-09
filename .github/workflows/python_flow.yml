@@ -67,5 +67,6 @@ jobs:
 
      
     - name: Run script
-      run: python ${{steps.get_file_name.outputs.filename}}
+      # run: python ${{steps.get_file_name.outputs.filename}}
+      run: python add_more_one.py
         
