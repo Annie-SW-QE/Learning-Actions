@@ -15,15 +15,16 @@ jobs:
         
         run: echo $(git diff --name-only HEAD^)
       - name: Set file list
+        id: file-list
         run: |
             if [[ "${{ github.event_name }}" == "push" ]]; then
             # For push events, compare against the previous commit in the branch
             files=$(git diff --name-only --diff-filter=ACMRTUXB "${{ github.event.before }}" "${{ github.sha }}")
             fi
-            echo ${files}
+            
             
             for file in ${files}; do
-                echo "$file"
+                echo "file=$file" >> $GITHUB_OUTPUT
                 #check file extension and save as output var for each, e.g. .py = python script, .txt = dependencies list
             done
             
