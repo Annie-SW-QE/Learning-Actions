@@ -26,13 +26,13 @@ jobs:
             changedfiles=$(git diff --name-only --diff-filter=ACMRTUXB "${{ github.event.before }}" "${{ github.sha }}")
             echo "$changedfiles"
             # YML_FILES=$(echo "$changedfiles" | grep '\.yml$')
-            # echo "yaml_files=$YML_FILES" >> GITHUB_OUTPUT
+            # echo "yaml_files=$YML_FILES" >> $GITHUB_OUTPUT
             PY_FILES=$(echo "$changedfiles" | grep '\.py$')
-            echo "$PY_FILES"
+            
             echo "pyfiles=$PY_FILES" >> $GITHUB_OUTPUT
-            echo "output: ${{steps.file-list.outputs.pyfiles}}"
+            
             # REQ_FILES=$(echo "$changedfiles" | grep '\.py$')
-            # echo "req_files=$REQ_FILES" >> GITHUB_OUTPUT
+            # echo "req_files=$REQ_FILES" >> $GITHUB_OUTPUT
             
             fi
             
@@ -58,4 +58,4 @@ jobs:
             ## grab requirements text from output
           - name: Run script
               # run: scripts from output
-            run: echo "retrieved file is:${{steps.file-list.outputs.py_files}}"
+            run: echo "retrieved file is:${{steps.file-list.outputs.pyfiles}}"
