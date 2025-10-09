@@ -23,7 +23,7 @@ jobs:
             changedfiles=$(git diff --name-only --diff-filter=ACMRTUXB "${{ github.event.before }}" "${{ github.sha }}")
             echo "$changedfiles"
             YML_FILES=$(echo "$changedfiles" | grep '\.yml$')
-            echo "yaml_files=YML_FILES" >> GITHUB_OUTPUT
+            echo "yaml_files=$YML_FILES" >> GITHUB_OUTPUT
             # PY_FILES=$(echo "$changedfiles" | grep '\.py$')
             # echo "py_files=$PY_FILES" >> GITHUB_OUTPUT
             # REQ_FILES=$(echo "$changedfiles" | grep '\.py$')
