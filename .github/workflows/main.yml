@@ -21,7 +21,11 @@ jobs:
             files=$(git diff --name-only --diff-filter=ACMRTUXB "${{ github.event.before }}" "${{ github.sha }}")
             fi
             echo ${files}
-            echo "changed_files=${files[*]}" >> "$GITHUB_OUTPUT"
+            
+            for file in ${files}; do
+                echo "$file"
+            done
+            
         shell: bash
         # run: echo "script_name=$(git diff --name-only HEAD^)}" >>"$GITHUB_OUTPUT"
       - name: Set up environment
