@@ -60,5 +60,5 @@ jobs:
       run: |
         echo "retrieved file is:${{needs.setup.outputs.pyfiles}}"
     - name: Run script
-      run: ${{needs.setup.outputs.pyfiles}}
+      run: python ${{needs.setup.outputs.pyfiles}}
         
