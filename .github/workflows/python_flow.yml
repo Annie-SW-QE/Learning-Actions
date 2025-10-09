@@ -28,7 +28,7 @@ jobs:
             # YML_FILES=$(echo "$changedfiles" | grep '\.yml$')
             # echo "yaml_files=$YML_FILES" >> GITHUB_OUTPUT
             PY_FILES=$(echo "$changedfiles" | grep '\.py$')
-            echo "$py_files=$PY_FILES"
+            echo "$PY_FILES"
             echo "py_files=$PY_FILES" >> GITHUB_OUTPUT
             # REQ_FILES=$(echo "$changedfiles" | grep '\.py$')
             # echo "req_files=$REQ_FILES" >> GITHUB_OUTPUT
