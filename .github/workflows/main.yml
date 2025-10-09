@@ -28,7 +28,7 @@ jobs:
                 #check file extension and save as output var for each, e.g. .py = python script, .txt = dependencies list
                if ".py" in ${file}; then
                echo "${file}"
-                
+               fi
             done
             
         shell: bash
