@@ -23,8 +23,8 @@ jobs:
         run: |
             if [[ "${{ github.event_name }}" == "push" ]]; then
             # For push events, compare against the previous commit in the branch
-            pyfiles=$(git diff --name-only --diff-filter=ACMRTUXB "${{ github.event.before }}" "${{ github.sha }}"| grep '\.yaml$')
-            echo "$pyfiles"
+            changedfiles=$(git diff --name-only --diff-filter=ACMRTUXB "${{ github.event.before }}" "${{ github.sha }}")
+            echo "$changedfiles
             fi
             
             
