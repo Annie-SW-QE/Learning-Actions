@@ -30,7 +30,7 @@ jobs:
             PY_FILES=$(echo "$changedfiles" | grep '\.py$')
             echo "$PY_FILES"
             echo "pyfiles=$PY_FILES" >> GITHUB_OUTPUT
-            echo "${{steps.file-list.outputs.pyfiles}}"
+            echo "output: ${{steps.file-list.outputs.pyfiles}}"
             # REQ_FILES=$(echo "$changedfiles" | grep '\.py$')
             # echo "req_files=$REQ_FILES" >> GITHUB_OUTPUT
             
