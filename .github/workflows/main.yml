@@ -30,9 +30,9 @@ jobs:
             for file in ${files}; do
                 # echo "file=$file" 
                 #check file extension and save as output var for each, e.g. .py = python script, .txt = dependencies list
-               if: ${{${file} = *"env.PY_EXT"}}; then
-               echo "Py file!"
-               fi
+                 echo "$file"
+                 echo "$PY_EXT"
+            
             done
             
         shell: bash
