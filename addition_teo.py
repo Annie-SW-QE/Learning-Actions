@@ -1,1 +1,1 @@
-print("yay me! a lot!")
+print("yay me! ")
