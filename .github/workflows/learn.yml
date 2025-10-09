@@ -1,4 +1,4 @@
-name: learn-workflows
+name: learn-to-work-flow
 run-name: learning
 on: 
   push:
