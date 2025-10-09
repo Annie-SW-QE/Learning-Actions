@@ -11,12 +11,11 @@ jobs:
         uses: actions/checkout@v5
         with: 
           fetch-depth: 2
-      - name: Show filename and set
-        id:  set_name
-        run: |  
-          echo $(git diff --name-only HEAD^)
-          
-          "script_name=$(git diff --name-only HEAD^)}" >>"$GITHUB_OUTPUT"
+      - name: Show filename
+        
+        run: echo $(git diff --name-only HEAD^)
+      - name: Set filename
+        run: echo "script_name=$(git diff --name-only HEAD^)}" >>"$GITHUB_OUTPUT"
           
           
 
