@@ -16,7 +16,11 @@ jobs:
         run: echo $(git diff --name-only HEAD^)
       - name: Set filename
         run: echo "script_name=$(git diff --name-only HEAD^)}" >>"$GITHUB_OUTPUT"
-          
+      - name: Set up environment
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      
           
 
         
