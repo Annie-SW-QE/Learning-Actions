@@ -51,14 +51,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Setup Python
+      
       uses: actions/setup-python@v6
       with:
             python-version: '3.13'
           # - name: Install dependencies
             ## grab requirements text from output
+    
     - name: Echo Output
       run: |
         echo "retrieved file is:${{needs.setup.outputs.pyfiles}}"
+        echo "current wd: ${{ github.workspace}}"
+
+     
     - name: Run script
-      run: python ${{needs.setup.outputs.pyfiles}}
+      # run: python ${{needs.setup.outputs.pyfiles}}
         
