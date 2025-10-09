@@ -7,7 +7,7 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      pyfiles: ${{steps.file-list.outputs.py_files}}
+      pyfiles: ${{steps.file-list.outputs.pyfiles}}
       # req_files: ${{steps.file-list.outputs.req_files}}
     steps:
       - name: Checkout and echo new filename
@@ -56,5 +56,7 @@ jobs:
             python-version: '3.13'
           # - name: Install dependencies
             ## grab requirements text from output
-    - name: Run
-      run: echo "retrieved file is:${{needs.setup.outputs.pyfiles}}"
+    - name: Echo Output
+      run: |
+        echo "retrieved file is:${{needs.setup.outputs.pyfiles}}"
+        
