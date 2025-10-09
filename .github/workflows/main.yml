@@ -25,6 +25,10 @@ jobs:
             # For push events, compare against the previous commit in the branch
             changedfiles=$(git diff --name-only --diff-filter=ACMRTUXB "${{ github.event.before }}" "${{ github.sha }}")
             echo "$changedfiles"
+            YML_FILES=$echo "$changedfiles" | grep '\.yml$')
+            echo "yaml_files=YML_FILES"
+            PY_FILES=$(echo "$changedfiles | grep '\.py$')
+            echo "py_files=$PY_FILES"
             fi
             
             
