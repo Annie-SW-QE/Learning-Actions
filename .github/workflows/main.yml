@@ -20,7 +20,9 @@ jobs:
             # For push events, compare against the previous commit in the branch
             files=$(git diff --name-only --diff-filter=ACMRTUXB "${{ github.event.before }}" "${{ github.sha }}")
             fi
+            echo ${files}
             echo "changed_files=${files}" >> "$GITHUB_OUTPUT"
+        shell: bash
         # run: echo "script_name=$(git diff --name-only HEAD^)}" >>"$GITHUB_OUTPUT"
       - name: Set up environment
         uses: actions/setup-python@v6
