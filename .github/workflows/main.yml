@@ -16,30 +16,23 @@ jobs:
         run: echo $(git diff --name-only HEAD^)
       - name: Set file list
         id: file-list
-        env: 
-          PY_EXT : ".py"
-          TXT_EXT: ".txt"
-          YML_EXT: ".yml"
+     
         run: |
             if [[ "${{ github.event_name }}" == "push" ]]; then
             # For push events, compare against the previous commit in the branch
             changedfiles=$(git diff --name-only --diff-filter=ACMRTUXB "${{ github.event.before }}" "${{ github.sha }}")
             echo "$changedfiles"
             YML_FILES=$(echo "$changedfiles" | grep '\.yml$')
-            echo "yaml_files=YML_FILES"
+            echo "yaml_files=YML_FILES" >> GITHUB_OUTPUT
             # PY_FILES=$(echo "$changedfiles" | grep '\.py$')
-            # echo "py_files=$PY_FILES"
+            # echo "py_files=$PY_FILES" >> GITHUB_OUTPUT
+            # REQ_FILES=$(echo "$changedfiles" | grep '\.py$')
+            # echo "req_files=$REQ_FILES" >> GITHUB_OUTPUT
+            
             fi
             
             
-        #     for file in ${files}; do
-        #         # echo "file=$file" 
-        #         #check file extension and save as output var for each, e.g. .py = python script, .txt = dependencies list
-        #          echo "$file"
-        #          echo "$YAML_EXT"
-                 # if: contains("$file","$YAML_EXT")
-            
-        #     done
+    
             
         # shell: bash
         
