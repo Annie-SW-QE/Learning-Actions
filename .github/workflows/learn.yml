@@ -2,7 +2,7 @@ name: learn-workflows
 on: 
   push:
     branches:
-    - main
+    - '**'
 jobs:
   setup:
     runs-on: ubuntu-latest
