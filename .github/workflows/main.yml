@@ -38,7 +38,7 @@ jobs:
         
           
       - name: Check output
-        run: echo "The output is:${{ steps.file-list.outputs.file}}"
+        run: echo "The output is:${{ steps.file-list.outputs.yaml_files}}"
       
       
   build: 
