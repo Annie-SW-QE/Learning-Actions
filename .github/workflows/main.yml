@@ -14,8 +14,14 @@ jobs:
       - name: Show filename
         
         run: echo $(git diff --name-only HEAD^)
-      - name: Set filename
-        run: echo "script_name=$(git diff --name-only HEAD^)}" >>"$GITHUB_OUTPUT"
+      - name: Set file list
+        run: |
+            if [[ "${{ github.event_name }}" == "push" ]]; then
+            # For push events, compare against the previous commit in the branch
+            files=$(git diff --name-only --diff-filter=ACMRTUXB "${{ github.event.before }}" "${{ github.sha }}")
+            fi
+            echo "changed_files=${files}" >> "$GITHUB_OUTPUT"
+        # run: echo "script_name=$(git diff --name-only HEAD^)}" >>"$GITHUB_OUTPUT"
       - name: Set up environment
         uses: actions/setup-python@v6
         with:
