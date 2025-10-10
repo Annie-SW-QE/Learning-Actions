@@ -71,5 +71,10 @@ jobs:
      
     - name: Run script
       run: python ${{steps.get_file_name.outputs.filename}}
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+      name: test-artifact
+      path: artifacts
       
         
