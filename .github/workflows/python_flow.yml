@@ -3,6 +3,8 @@ on:
   push:
     branches:
     - python-only
+    paths-ignore:
+    - ".github/workflows/**"
 jobs:
   setup:
     runs-on: ubuntu-latest
