@@ -1,0 +1,15 @@
+#test passing vars to python script
+name: Use Vars
+on:
+  workflow_dispatch:
+jobs: 
+    job1:
+      runs-on: ubuntu-latest
+      steps:
+        # - uses: actions/checkout@v5
+        - name: set var
+          id: set-var
+          env:
+              my_var: wee
+        - name: echo var
+          run: echo ${{env.my_var}}
