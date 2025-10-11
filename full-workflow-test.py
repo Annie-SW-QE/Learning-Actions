@@ -9,3 +9,4 @@ for i in range(0,20,1):
 my_df = pd.DataFrame(my_array)
 os.mkdir("artifacts")
 my_df.to_excel("artifacts/my_excel.xlsx")
+print("Done!")
