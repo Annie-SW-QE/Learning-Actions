@@ -74,8 +74,7 @@ jobs:
         echo "current wd: ${{ github.workspace}}"
     - name: checkout again
       uses: actions/checkout@v5
-      with: 
-          fetch-depth: 2
+      
     - name: Install dependencies
             # grab requirements text from output
       run: |
