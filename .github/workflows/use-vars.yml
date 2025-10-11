@@ -12,6 +12,6 @@ jobs:
           
           run: | 
                  MY_VAR="woo"
-                 echo "my_var=$MY_VAR >> $GITHUB_ENV
+                 echo "my_var=$MY_VAR" >> $GITHUB_ENV
         - name: echo var
           run: echo ${{env.my_var}}
