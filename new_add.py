@@ -1,4 +1,4 @@
-phrase = "I am a barbie girl I hate this stupid wooooorrrrllld"
+phrase = "I am a barbie girl. I hate this stupid wooooorrrrllld"
 print(phrase)
 
 with open("artifacts\printed_text.txt","w") as f:
