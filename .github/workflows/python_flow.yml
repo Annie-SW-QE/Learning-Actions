@@ -92,6 +92,15 @@ jobs:
             role-to-assume: arn:aws:iam::412381742094:role/GHA
             role-session-name: MySessionName
             output-env-credentials: true
-
+    
     - name: Run script
       run: python ${{steps.get_file_name.outputs.filename}}
+    - name: Navigate to artifacts dir
+      run: |
+            cd artifacts
+            ls -la
+    - name: Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+          name: ${{github.triggering_actor}} artifacts
+          path: artifacts
