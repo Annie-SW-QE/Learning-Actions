@@ -20,7 +20,7 @@ jobs:
         - name: Get Secret
           run: | 
                 SECRET_VALUE=$(aws secretsmanager get-secret-value --secret-id here --query SecretString --output text)
-                exch ${SECRET_VALUE}
+                echo ${SECRET_VALUE}
           
     
       
