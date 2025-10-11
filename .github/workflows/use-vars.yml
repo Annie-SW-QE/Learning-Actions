@@ -20,6 +20,8 @@ jobs:
           run: echo ${{env.my_var}}
         - name: checkout
           uses: actions/checkout@v5
+          with:
+              fetch-depth: 2
         - name: Echo changed files
           run: echo $(git diff --name-only HEAD^)
         - name: Get py files
