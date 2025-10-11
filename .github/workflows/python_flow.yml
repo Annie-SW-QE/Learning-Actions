@@ -16,8 +16,8 @@ jobs:
     steps:
       - name: Checkout and echo new filename
         uses: actions/checkout@v5
-        with: 
-          fetch-depth: 1
+        # with: 
+        #   fetch-depth: 1
       - name: Show filename
         
         run: echo $(git diff --name-only HEAD^)
