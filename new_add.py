@@ -1,7 +1,7 @@
 phrase = "I am a barbie girl. I hate this stupid wooooorrrrllld"
 print(phrase)
 
-with open("artifacts\printed_text.txt","w") as f:
+with open("printed_text.txt","w") as f:
     f.write(phrase)
     f.close()
     
