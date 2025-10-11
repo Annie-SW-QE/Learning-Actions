@@ -19,8 +19,8 @@ jobs:
             output-credentials: true
         - name: Get Secret
           run: | 
-                # aws secretsmanager get-secret-value --secret-id <here>
-                echo ${{aws secretsmanager get-secret-value --secret-id <here>}}
+                SECRET_VALUE=$(aws secretsmanager get-secret-value --secret-id here --query SecretString --output text)
+                exch ${SECRET_VALUE}
           
     
       
