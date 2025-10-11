@@ -11,6 +11,6 @@ jobs:
           id: set-var
           env:
               my_var: wee
+          run: echo ${{env.my_var}} >> $GITHUB_ENV
+        - name: echo var
           run: echo ${{env.my_var}}
-        # - name: echo var
-        #   run: echo ${{env.my_var}}
