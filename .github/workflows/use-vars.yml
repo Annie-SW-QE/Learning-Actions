@@ -9,8 +9,9 @@ jobs:
         # - uses: actions/checkout@v5
         - name: set var
           id: set-var
-          env:
-              my_var: woo
-          run: echo ${{env.my_var}} >> $GITHUB_ENV
+          
+          run: | 
+                 MY_VAR="woo"
+                 echo "my_var=$MY_VAR >> $GITHUB_ENV
         - name: echo var
           run: echo ${{env.my_var}}
