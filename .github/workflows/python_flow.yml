@@ -98,10 +98,10 @@ jobs:
                 echo "my_var=${SECRET_VALUE}" >> $GITHUB_ENV
     - name: Run script
       run: python ${{steps.get_file_name.outputs.filename}}
-    - name: checkout again
-      uses: actions/checkout@v5
-      with:
-          fetch-depth: 2
+    # - name: checkout again
+    #   uses: actions/checkout@v5
+    #   with:
+    #       fetch-depth: 2
     - name: list files
       run:  ls -la
     # - name: Navigate to artifacts dir
