@@ -35,7 +35,7 @@ jobs:
             echo "$PY_FILES"
             echo "pyfiles=$PY_FILES" >> $GITHUB_OUTPUT
             
-            REQ_FILES=$(echo "$changedfiles" | grep '\.py$')
+            REQ_FILES=$(echo "$changedfiles" | grep '\.txt$')
             echo "reqfiles=$REQ_FILES" >> $GITHUB_OUTPUT
             
             fi
