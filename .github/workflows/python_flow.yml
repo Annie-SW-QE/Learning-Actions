@@ -5,6 +5,7 @@ on:
     - python-only
     paths-ignore:
     - ".github/workflows/**"
+  workflow_dispatch:
 jobs:
   setup:
     runs-on: ubuntu-latest
@@ -70,8 +71,10 @@ jobs:
       uses: actions/checkout@v5
       with: 
           fetch-depth: 2
-    - name: Make dir
-      run: mkdir artifacts
+    - name: Print GITHUB_WORKSPACE
+      run: echo "The workspace path is:${{GITHUB_WORKSPACE}}"
+    # - name: Make dir
+    #   run: mkdir artifacts
     - name: Run script
       run: python ${{steps.get_file_name.outputs.filename}}
     - name: find files
