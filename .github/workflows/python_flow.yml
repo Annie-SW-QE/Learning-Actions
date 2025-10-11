@@ -83,7 +83,7 @@ jobs:
       run: |
             ls -la
             pwd
-    - name: Upload artifacts
+    # - name: Upload artifacts
       # uses: actions/upload-artifact@v4
       # with:
       #   name: test-artifact
