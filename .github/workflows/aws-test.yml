@@ -1,0 +1,17 @@
+## Test workflow for aws creds retrieval
+name: AWS Creds Grab
+on:
+  workflow_dispatch:
+jobs:
+  grab-creds:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Configure Creds
+          uses: aws-actions/configure-aws-credentials@v5.1.0
+          with:
+            aws:-region: us-east-1
+            role-to-assume: arn:aws:iam::412381742094:role/GHA
+            role-session-name: MySessionName
+    
+      
+            
