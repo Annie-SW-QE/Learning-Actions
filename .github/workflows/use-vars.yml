@@ -10,7 +10,7 @@ jobs:
         - name: set var
           id: set-var
           env:
-              my_var: wee
+              my_var: woo
           run: echo ${{env.my_var}} >> $GITHUB_ENV
         - name: echo var
           run: echo ${{env.my_var}}
