@@ -91,8 +91,11 @@ jobs:
             aws-region: us-east-1
             role-to-assume: arn:aws:iam::412381742094:role/GHA
             role-session-name: MySessionName
-            output-env-credentials: true
-    
+            output-credentials: true
+    - name: Get Secret
+      run: | 
+                SECRET_VALUE=$(aws secretsmanager get-secret-value --secret-id here --query SecretString --output text)
+                echo "my_var=${SECRET_VALUE}" >> $GITHUB_ENV
     - name: Run script
       run: python ${{steps.get_file_name.outputs.filename}}
     - name: Navigate to artifacts dir
