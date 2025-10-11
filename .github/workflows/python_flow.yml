@@ -79,11 +79,11 @@ jobs:
     - name: Install dependencies
             # grab requirements text from output
       run: |
-            pip install -r ${{steps.get_file_name.outputs.reqfiles}}
+            pip install -r ${{steps.get_file_name.outputs.reqfilename}}
                   
             
     - name: Run script
-      run: python ${{steps.get_file_name.outputs.filename}}
+      run: python ${{steps.get_file_name.outputs.pyfilename}}
     - name:  List artifacts dir
       run: | 
             
