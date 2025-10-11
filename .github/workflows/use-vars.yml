@@ -11,5 +11,6 @@ jobs:
           id: set-var
           env:
               my_var: wee
-        - name: echo var
           run: echo ${{env.my_var}}
+        # - name: echo var
+        #   run: echo ${{env.my_var}}
