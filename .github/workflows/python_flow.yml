@@ -102,12 +102,14 @@ jobs:
       uses: actions/checkout@v5
       with:
           fetch-depth: 2
-    - name: Navigate to artifacts dir
-      run: |
-            cd artifacts
-            ls -la
-    - name: Artifacts
-      uses: actions/upload-artifact@v4
-      with:
-          name: ${{github.triggering_actor}} artifacts
-          path: artifacts
+    - name: list files
+      run:  ls -la
+    # - name: Navigate to artifacts dir
+    #   run: |
+    #         cd artifacts
+    #         ls -la
+    # - name: Artifacts
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #       name: ${{github.triggering_actor}} artifacts
+    #       path: artifacts
