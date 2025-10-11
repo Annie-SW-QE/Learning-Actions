@@ -6,6 +6,9 @@ on:
     paths-ignore:
     - ".github/workflows/**"
   workflow_dispatch:
+defaults:
+  run:
+    working-directory: Learning-Actions
 jobs:
   setup:
     runs-on: ubuntu-latest
@@ -81,6 +84,6 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: test-artifact
-        path: ${{github.workspace}}/artifacts
+        path: Learning-Actions/artifacts
       
         
