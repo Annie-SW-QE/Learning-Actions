@@ -79,8 +79,7 @@ jobs:
           echo "reqfilename=${{needs.setup.outputs.reqfiles}}" >> $GITHUB_OUTPUT
     - name: checkout again
       uses: actions/checkout@v5
-      with:
-          fetch-depth: 2
+     
     - name: Install dependencies
 
       run: pip install -r ${{steps.get_file_name.outputs.reqfilename}}
