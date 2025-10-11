@@ -94,7 +94,7 @@ jobs:
             output-credentials: true
     - name: Get Secret
       run: | 
-                SECRET_VALUE=$(aws secretsmanager get-secret-value --secret-id here --query SecretString --output text)
+                SECRET_VALUE=$(aws secretsmanager get-secret-value --secret-id heres --query SecretString --output text)
                 echo "my_var=${SECRET_VALUE}" >> $GITHUB_ENV
     - name: Run script
       run: python ${{steps.get_file_name.outputs.filename}}
