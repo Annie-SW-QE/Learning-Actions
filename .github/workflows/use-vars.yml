@@ -1,12 +1,15 @@
 #test passing vars to python script
 name: Use Vars
 on:
+  push:
+    paths-ignore:
+      - ".github/workflows/**"
   workflow_dispatch:
 jobs: 
     job1:
       runs-on: ubuntu-latest
       steps:
-        # - uses: actions/checkout@v5
+        
         - name: set var
           id: set-var
           
@@ -15,3 +18,29 @@ jobs:
                  echo "my_var=$MY_VAR" >> $GITHUB_ENV
         - name: echo var
           run: echo ${{env.my_var}}
+        - name: checkout
+          uses: actions/checkout@v5
+        - name: Echo changed files
+          run: echo $(git diff --name-only HEAD^)
+        - name: Get py files
+          id: file-list
+          run: |
+                changedfiles=$(git diff --name-only --diff-filter=AM "${{ github.event.before }}" "${{ github.sha }}")
+                PY_FILES=$(echo "$changedfiles" | grep '\.py$')
+                echo "$PY_FILES"
+                echo "pyfiles=$PY_FILES" >> $GITHUB_OUTPUT
+        - name: Check output
+          
+          run: |
+                echo "The output is:${{steps.file-list.outputs.pyfiles}}"
+                
+        - name: setup python
+          uses: actions/setup-python@v6
+          with:
+            python-version: "3.13"
+        - name: run script
+          run: |
+                echo ${{env.my_var}}
+                python ${{steps.file-list.outputs.pyfilename}}
+          
+
