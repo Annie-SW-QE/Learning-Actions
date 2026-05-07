@@ -1,29 +1,32 @@
 name: python-script-manager
-on: 
+on:
   push:
     branches:
     - python-only
+    
     paths-ignore:
-    - ".github/workflows/**"
-  workflow_dispatch:
-
+      - ".github/workflows/**"
 jobs:
   setup:
+
     runs-on: ubuntu-latest
+    permissions:
+          contents: 'read'
+          id-token: 'write'
     outputs:
       pyfiles: ${{steps.file-list.outputs.pyfiles}}
-      # req_files: ${{steps.file-list.outputs.req_files}}
+      reqfiles: ${{steps.file-list.outputs.reqfiles}}
     steps:
       - name: Checkout and echo new filename
         uses: actions/checkout@v5
-        with: 
+        with:
           fetch-depth: 2
       - name: Show filename
-        
+
         run: echo $(git diff --name-only HEAD^)
       - name: Set file list
         id: file-list
-     
+
         run: |
             if [[ "${{ github.event_name }}" == "push" ]]; then
             # For push events, compare against the previous commit in the branch
@@ -34,61 +37,78 @@ jobs:
             PY_FILES=$(echo "$changedfiles" | grep '\.py$')
             echo "$PY_FILES"
             echo "pyfiles=$PY_FILES" >> $GITHUB_OUTPUT
-            
-            # REQ_FILES=$(echo "$changedfiles" | grep '\.py$')
-            # echo "req_files=$REQ_FILES" >> $GITHUB_OUTPUT
-            
+
+            REQ_FILES=$(echo "$changedfiles" | grep '\.txt$')
+            echo "reqfiles=$REQ_FILES" >> $GITHUB_OUTPUT
+
             fi
-            
-            
-    
-            
+
+
+
+
         # shell: bash
-        
-          
+
+
       - name: Check output
-        run: echo "The output is:${{steps.file-list.outputs.pyfiles}}"
-      
-      
-  build: 
+        run: |
+              echo "The output is:${{steps.file-list.outputs.pyfiles}}"
+              echo "The output is:${{steps.file-list.outputs.reqfiles}}"
+
+
+  build:
     needs: setup
     runs-on: ubuntu-latest
+    permissions:
+          contents: 'read'
+          id-token: 'write'
     steps:
     - name: Setup Python
-      
+
       uses: actions/setup-python@v6
       with:
             python-version: '3.13'
           # - name: Install dependencies
             ## grab requirements text from output
-    
+
     - name: Echo Output
       id: get_file_name
       run: |
-        echo "retrieved file is:${{needs.setup.outputs.pyfiles}}" 
-        echo "filename=${{needs.setup.outputs.pyfiles}}" >> $GITHUB_OUTPUT
-        echo "current wd: ${{ github.workspace}}"
+          echo "retrieved file is:${{needs.setup.outputs.pyfiles}}"
+          echo "retrieved file is:${{needs.setup.outputs.reqfiles}}"
+          echo "pyfilename=${{needs.setup.outputs.pyfiles}}" >> $GITHUB_OUTPUT
+          echo "reqfilename=${{needs.setup.outputs.reqfiles}}" >> $GITHUB_OUTPUT
     - name: checkout again
       uses: actions/checkout@v5
-      with: 
-          fetch-depth: 2
-    
-            
+     
+    - name: Install dependencies
+
+      run: pip install -r ${{steps.get_file_name.outputs.reqfilename}}
+    - name: Configure Creds
+      id: creds
+      uses: aws-actions/configure-aws-credentials@v5.1.0
+      with:
+            aws-region: us-east-1
+            role-to-assume: arn:aws:iam::412381742094:role/GHA
+            role-session-name: MySessionName
+            output-credentials: true
+    - name: Get Secret
+      run: | 
+                SECRET_VALUE=$(aws secretsmanager get-secret-value --secret-id heres --query SecretString --output text)
+                echo "my_var=${SECRET_VALUE}" >> $GITHUB_ENV
     - name: Run script
       run: python ${{steps.get_file_name.outputs.filename}}
-    - name:  List artifacts dir
-      run: | 
-            
+    # - name: checkout again
+    #   uses: actions/checkout@v5
+    #   with:
+    #       fetch-depth: 2
+    - name: list files
+      run:  ls -la
+    - name: Navigate to artifacts dir
+      run: |
             cd artifacts
             ls -la
-    # - name: find files
-    #   run: |
-    #         ls -la
-    #         pwd
-    - name: Upload artifacts
+    - name: Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: test-artifact
-        path: artifacts
-      
-        
+          name: ${{github.triggering_actor}} artifacts
+          path: artifacts
