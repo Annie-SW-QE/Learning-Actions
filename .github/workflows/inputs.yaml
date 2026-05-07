@@ -6,12 +6,10 @@ on:
        description: 'Input to echo'
        required: true
        default: 'World'
-     use-emoji:
-       type: boolean
-       description: 'Include emojis?'
+   
 jobs:
  greet:
    runs-on: ubuntu-latest
    steps:
      - name: Echo Input
-       run: echo "${{ github.event.inputs.name }} ${{ fromJSON('[\"\", \"😊\"]')[github.event.inputs.use-emoji == 'true'] }}"
+       run: echo "${{ github.event.inputs.name }}"
