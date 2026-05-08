@@ -8,7 +8,7 @@ jobs:
           contents: read
           id-token: write
       outputs:
-        pyfile: ${{steps.get-script.outputs.pyfile}}
+        pyfiles: ${{steps.get-script.outputs.pyfiles}}
       steps:
         - name: Grab Script
           id: get-script
@@ -19,3 +19,22 @@ jobs:
               Palette_list.csv
               picker_requirements.txt
             sparse-checkout-cone-mode: false
+        - name: show-me
+          run: |
+            git ls-files
+            PY_FILES = $(find. -type f | sed 's|^\./||')
+            echo "$PY_FILES"
+          
+        - name: Show sparse checkout file
+          run: cat .git/info.sparse-checkout
+          
+        - name: Save file list as output
+          id: files
+          run: |
+            PY_FILES=$(find . -type f | sed 's|^\./||' | paste -sd "," -)
+            echo "py_files=$PY_FILES" >> $GITHUB_OUTPUT
+        - name: Show files as output
+          run: |
+            echo "Files from sparse checkout: ${{ steps.files.outputs.files }}"
+
+          
