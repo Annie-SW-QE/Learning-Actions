@@ -14,6 +14,8 @@ jobs:
           id: get-script
           uses: actions/checkout@v4
           with:
+            repository: Annie-SW-QE/Learning-Actions
+            ref: main
             sparse-checkout:
               palette_picker.py
               Palette_list.csv
