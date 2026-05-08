@@ -1,0 +1,21 @@
+name: Test Script Checkout
+on: 
+  workflow_dispatch:
+jobs:
+    setup:
+      runs-on: ubuntu-latest
+      permissions:
+          contents: read
+          id-token: write
+      outputs:
+        pyfile: ${{steps.get-script.outputs.pyfile}}
+      steps:
+        - name: Grab Script
+          id: get-script
+          uses: actions/checkout@v4
+          with:
+            sparse-checkout:
+              palette_picker.py
+              Palette_list.csv
+              picker_requirements.txt
+            sparse-checkout-cone-mode: false
