@@ -10,9 +10,14 @@ jobs:
       outputs:
         pyfiles: ${{steps.get-script.outputs.pyfiles}}
       steps:
+        - uses: actions/checkout@v6
+        - name: Install find
+          run: |
+            sudo apt-get update
+            sudo apt-get install -y findutils
         - name: Grab Script
           id: get-script
-          uses: actions/checkout@v4
+          uses: actions/checkout@v6
           with:
             repository: Annie-SW-QE/Learning-Actions
             ref: main
